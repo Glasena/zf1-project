@@ -3,7 +3,8 @@ MIGRATIONS = docker compose run --rm php vendor/bin/doctrine-migrations --config
 
 .PHONY: up down build restart logs shell install ps db \
         doctrine-validate doctrine-schema-create doctrine-schema-update doctrine-schema-drop \
-        migration-diff migration-migrate migration-status migration-rollback
+        migration-diff migration-migrate migration-status migration-rollback \
+        test test-unit test-integration
 
 # ── Docker ────────────────────────────────────────────────────────────────────
 
@@ -36,6 +37,17 @@ db:
 
 kill:
 	docker kill $$(docker ps -q)
+
+# ── Tests ─────────────────────────────────────────────────────────────────────
+
+test:
+	docker compose run --rm php vendor/bin/phpunit
+
+test-unit:
+	docker compose run --rm php vendor/bin/phpunit --testsuite Unit
+
+test-integration:
+	docker compose run --rm php vendor/bin/phpunit --testsuite Integration
 
 # ── Doctrine ORM ──────────────────────────────────────────────────────────────
 
