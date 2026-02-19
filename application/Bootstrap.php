@@ -8,14 +8,6 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-    protected function _initAutoload(): void
-    {
-        new Zend_Application_Module_Autoloader([
-            'namespace' => 'Application',
-            'basePath'  => APPLICATION_PATH,
-        ]);
-    }
-
     protected function _initViewSetup(): Zend_View
     {
         $this->bootstrap('view');
